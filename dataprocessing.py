@@ -44,8 +44,8 @@ from google.cloud import bigquery
 
 # globals:
 BUCKET_NAME = "denolte-showcase-qlikbigdata" # <-- dynamic?
-PROJECT_ID= "denolte-showcase-qlikbigdata" # <-- define: static val?
-DATASET_ID = "BORINGNAME"
+PROJECT_ID= "denolte-showcase-qlikbigdata" # <-- dynamic?
+DATASET_ID = "DATAPROCESS" # <-- same in dependencies.sh script - should make env variable
 
 # queries
 # 1. weather data: precipitation by day in new-york
@@ -130,4 +130,4 @@ if __name__ == '__main__':
 
     # save to GCS
     #saveBigQueryDataToGCP(client, "dir_noaa", "noaa_gsod_extract")
-    #saveBigQueryDataToGCP(client, "dir_bike", "citibike_trips_extract")
+    saveBigQueryDataToGCP(client, "dir_bike", "citibike_trips_extract")

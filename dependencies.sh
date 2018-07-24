@@ -9,10 +9,15 @@ gsutil -m rm -rf gs://$BUCKET/dir_bike/citibike_trips_extract
 
 ## run python script: note - pass global variables here? BUCKET_NAME, PROJECT_ID
 ## clone repository --> move to deployment script
-rm -rf ../dataprepGCP
 git clone https://github.com/DouglasFletcher/dataprepGCP.git
+
+# set up datasets in bigquery
+echo y | bq mk  DATAPROCESS
 
 ## run application
 cd ../dataprepGCP
 python dataprocessing.py 
+
+# remove datasets in bigquery
+echo y | bq rm DATAPROCESS 
 
