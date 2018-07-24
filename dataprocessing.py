@@ -51,14 +51,15 @@ DATASET_ID = "BORINGNAME"
 # 1. weather data: precipitation by day in new-york
 queryVal1 = """
     SELECT stn, year, mo, da, temp, prcp 
-    FROM `bigquery-public-data:noaa_gsod.gsod2018`
-        , `bigquery-public-data:noaa_gsod.gsod2017`
-        , `bigquery-public-data:noaa_gsod.gsod2016`
-        , `bigquery-public-data:noaa_gsod.gsod2015`
-        , `bigquery-public-data:noaa_gsod.gsod2014`
-        , `bigquery-public-data:noaa_gsod.gsod2013`
+    FROM `bigquery-public-data.noaa_gsod.gsod2018`
+        , `bigquery-public-data.noaa_gsod.gsod2017`
+        , `bigquery-public-data.noaa_gsod.gsod2016`
+        , `bigquery-public-data.noaa_gsod.gsod2015`
+        , `bigquery-public-data.noaa_gsod.gsod2014`
+        , `bigquery-public-data.noaa_gsod.gsod2013`
     WHERE stn = '725060'    
     """
+
 # 2. bike data: no. of rentals per day, by station
 queryVal2 = """
     SELECT start_station_id 
@@ -70,7 +71,7 @@ queryVal2 = """
         , start_station_latitude
         , start_station_longitude
         , sum(1) as rentCounter
-    FROM `bigquery-public-data:new_york_citibike.citibike_trips` 
+    FROM `bigquery-public-data.new_york_citibike.citibike_trips` 
     WHERE start_station_id IS NOT NULL
     GROUP BY start_station_id
         , date
@@ -123,9 +124,9 @@ if __name__ == '__main__':
     client = bigquery.Client()
 
     # save to table bigquery: note- delete tables if exist before saving?    
-    prepareBigQueryData(client, queryVal1, "noaa_gsod_extract")
+    #prepareBigQueryData(client, queryVal1, "noaa_gsod_extract")
     prepareBigQueryData(client, queryVal2, "citibike_trips_extract")
 
     # save to GCS
-    saveBigQueryDataToGCP(client, "dir_noaa", "noaa_gsod_extract")
+    #saveBigQueryDataToGCP(client, "dir_noaa", "noaa_gsod_extract")
     saveBigQueryDataToGCP(client, "dir_bike", "citibike_trips_extract")
