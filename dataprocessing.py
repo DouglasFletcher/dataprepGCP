@@ -63,10 +63,11 @@ queryVal1 = """
 # 2. bike data: no. of rentals per day, by station
 queryVal2 = """
     SELECT start_station_id 
-        , DATE(starttime) as date
-        , DAY(starttime) as da
-        , MONTH(starttime) as mo
-        , YEAR(starttime) as year
+        , starttime as date
+        #, DATE(starttime) as date
+        #, DAY(starttime) as da
+        #, MONTH(starttime) as mo
+        #, YEAR(starttime) as year
         , start_station_name 
         , start_station_latitude
         , start_station_longitude
@@ -75,9 +76,9 @@ queryVal2 = """
     WHERE start_station_id IS NOT NULL
     GROUP BY start_station_id
         , date
-        , da
-        , mo
-        , year
+        #, da
+        #, mo
+        #, year
         , start_station_name
         , start_station_latitude
         , start_station_longitude  
