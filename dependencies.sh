@@ -12,7 +12,7 @@ gsutil -m rm -rf gs://$BUCKET/dir_bike/citibike_trips_extract
 git clone https://github.com/DouglasFletcher/dataprepGCP.git
 
 # set up datasets in bigquery
-echo y | bq mk  DATAPROCESS
+echo y | bq mk DATAPROCESS
 
 ## run application
 cd ../dataprepGCP
