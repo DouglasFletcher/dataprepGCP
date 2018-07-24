@@ -8,5 +8,10 @@ gsutil -m rm -rf gs://$BUCKET/dir_bike/citibike_trips_extract
 ## process to clear bigquery?
 
 ## run python script: note - pass global variables here? BUCKET_NAME, PROJECT_ID
+## clone repository --> move to deployment script
+git clone https://github.com/DouglasFletcher/dataprepGCP.git
+
+## run application
+cd ../dataprepGCP
 python dataprocessing.py 
 
