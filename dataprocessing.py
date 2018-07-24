@@ -43,9 +43,13 @@ from google.cloud import bigquery
 ##########################################################################
 
 # globals:
-BUCKET_NAME = "denolte-showcase-qlikbigdata" # <-- dynamic?
-PROJECT_ID= "denolte-showcase-qlikbigdata" # <-- dynamic?
+#BUCKET_NAME = "denolte-showcase-qlikbigdata" # <-- dynamic?
+#PROJECT_ID= "denolte-showcase-qlikbigdata" # <-- dynamic?
 DATASET_ID = "DATAPROCESS" # <-- same in dependencies.sh script - should make env variable
+
+# test in qwiklabs
+BUCKET_NAME = "qwiklabs-gcp-751dc9b3c3f888c9"
+PROJECT_ID = "qwiklabs-gcp-751dc9b3c3f888c9"
 
 # queries
 # 1. weather data: precipitation by day in new-york
@@ -105,7 +109,7 @@ def saveBigQueryDataToGCP(client, outdir, tableId):
     save resultset from prepareBigQueryData to google cloud storage
     """
     # def save locations
-    destinationUri = 'gs://{}/tmp/{}/{}'.format(BUCKET_NAME, outdir, 'output.*')
+    destinationUri = 'gs://{}/tmp/{}/{}'.format(BUCKET_NAME, outdir, 'output.csv')
     datasetRef = client.dataset(DATASET_ID, project=PROJECT_ID)
     tableRef = datasetRef.table(tableId)
     # extract to GCS
