@@ -43,7 +43,7 @@ from google.cloud import bigquery
 ##########################################################################
 
 # globals:
-BUCKET_NAME = "BUCKET_NAME" # <-- dynamic?
+BUCKET_NAME = "denolte-showcase-qlikbigdata" # <-- dynamic?
 PROJECT_ID= "SET_PROJECT_ID" # <-- define: static val?
 DATASET_ID = BUCKET_NAME
 
@@ -103,7 +103,7 @@ def saveBigQueryDataToGCP(client, outdir, tableId):
     save resultset from prepareBigQueryData to google cloud storage
     """
     # def save locations
-    destinationUri = 'gs://{}/{}/{}'.format(BUCKET_NAME, outdir, 'output.*')
+    destinationUri = 'gs://{}/tmp/{}/{}'.format(BUCKET_NAME, outdir, 'output.*')
     datasetRef = client.dataset(DATASET_ID, project=PROJECT_ID)
     tableRef = datasetRef.table(tableId)
     # extract to GCS
