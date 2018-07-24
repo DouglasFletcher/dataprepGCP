@@ -114,7 +114,7 @@ def saveBigQueryDataToGCP(client, outdir, tableId):
         destinationUri,
         location='US'
     )  
-    extract_job.result()  
+    extractJob.result()  
     print('Exported {}:{}.{} to {}'.format(PROJECT_ID, DATASET_ID, tableId, destinationUri))
 
 
