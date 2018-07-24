@@ -90,7 +90,7 @@ def prepareBigQueryData(client, queryVal, tableId):
     """
     # save location: 
     jobConfig = bigquery.QueryJobConfig()
-    tableRef = client.dataset(DATASET_ID).table(saveTableLoc)
+    tableRef = client.dataset(DATASET_ID).table(tableId)
     jobConfig.destination = tableRef
     # query result: location is set from global variable?
     queryJob = client.query(queryVal, location='US', job_config=jobConfig)  
