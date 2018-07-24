@@ -45,7 +45,7 @@ from google.cloud import bigquery
 # globals:
 BUCKET_NAME = "denolte-showcase-qlikbigdata" # <-- dynamic?
 PROJECT_ID= "SET_PROJECT_ID" # <-- define: static val?
-DATASET_ID = BUCKET_NAME
+DATASET_ID = "BORINGNAME"
 
 # queries
 # 1. weather data: precipitation by day in new-york
