@@ -13,8 +13,8 @@ echo "env variables set: BUCKET=$BUCKET PROJECT=$PROJECT DATASET=$DATASET"
 #git clone https://github.com/DouglasFletcher/dataprepGCP.git
 
 ## first delete files if exist
-gsutil -m rm -rf gs://$BUCKET/dir_noaa/noaa_gsod_extract
-gsutil -m rm -rf gs://$BUCKET/dir_bike/citibike_trips_extract
+gsutil -m rm -rf gs://$BUCKET/tmp/dir_noaa/output.csv
+gsutil -m rm -rf gs://$BUCKET/tmp/dir_bike/output.csv
 
 # set up datasets in bigquery
 echo y | bq mk $DATASET

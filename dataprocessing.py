@@ -51,15 +51,30 @@ PROJECT_ID = os.environ.get('PROJECT')
 # queries
 # 1. weather data: precipitation by day in new-york
 queryVal1 = """
-    SELECT stn, year, mo, da, temp, prcp 
-    FROM `bigquery-public-data.noaa_gsod.gsod2018`
-        , `bigquery-public-data.noaa_gsod.gsod2017`
-        , `bigquery-public-data.noaa_gsod.gsod2016`
-        , `bigquery-public-data.noaa_gsod.gsod2015`
-        , `bigquery-public-data.noaa_gsod.gsod2014`
-        , `bigquery-public-data.noaa_gsod.gsod2013`
-    WHERE stn = '725060'    
-    """
+	SELECT stn, year, mo, da, temp, prcp 
+	FROM `bigquery-public-data.noaa_gsod.gsod2018`
+	WHERE stn = '725060'
+	UNION ALL
+	SELECT stn, year, mo, da, temp, prcp 
+	FROM `bigquery-public-data.noaa_gsod.gsod2017`
+	WHERE stn = '725060'
+	UNION ALL
+	SELECT stn, year, mo, da, temp, prcp 
+	FROM `bigquery-public-data.noaa_gsod.gsod2016`
+	WHERE stn = '725060'
+	UNION ALL
+	SELECT stn, year, mo, da, temp, prcp 
+	FROM `bigquery-public-data.noaa_gsod.gsod2015`
+	WHERE stn = '725060'
+	UNION ALL
+	SELECT stn, year, mo, da, temp, prcp 
+	FROM `bigquery-public-data.noaa_gsod.gsod2014`
+	WHERE stn = '725060'
+	UNION ALL
+	SELECT stn, year, mo, da, temp, prcp 
+	FROM `bigquery-public-data.noaa_gsod.gsod2013`
+	WHERE stn = '725060'
+"""
 
 # 2. bike data: no. of rentals per day, by station
 queryVal2 = """
