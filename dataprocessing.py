@@ -43,13 +43,9 @@ from google.cloud import bigquery
 ##########################################################################
 
 # globals:
-#BUCKET_NAME = "denolte-showcase-qlikbigdata" # <-- dynamic?
-#PROJECT_ID= "denolte-showcase-qlikbigdata" # <-- dynamic?
-DATASET_ID = "DATAPROCESS" # <-- same in dependencies.sh script - should make env variable
-
-# test in qwiklabs
-BUCKET_NAME = "qwiklabs-gcp-751dc9b3c3f888c9"
-PROJECT_ID = "qwiklabs-gcp-751dc9b3c3f888c9"
+DATASET_ID = os.environ.get('DATASET') # <-- same in dependencies.sh script - should make env variable
+BUCKET_NAME = os.environ.get('BUCKET')
+PROJECT_ID = os.environ.get('PROJECT')
 
 # queries
 # 1. weather data: precipitation by day in new-york
