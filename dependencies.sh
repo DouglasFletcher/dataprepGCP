@@ -4,10 +4,11 @@ pip install -r requirements.txt
 export DATASET="DATAPROCESS"
 export BUCKET="qwiklabs-gcp-20478e656e2da2c9"
 export PROJECT="qwiklabs-gcp-20478e656e2da2c9"
+export LOCATION="US"
 #export BUCKET="denolte-showcase-qlikbigdata"
 #export PROJECT="denolte-showcase-qlikbigdata"
 
-echo "env variables set: BUCKET=$BUCKET PROJECT=$PROJECT DATASET=$DATASET" 
+echo "env variables set: BUCKET=$BUCKET PROJECT=$PROJECT DATASET=$DATASET LOCATION=$LOCATION" 
 
 ## clone repository --> move to deployment script
 #git clone https://github.com/DouglasFletcher/dataprepGCP.git
