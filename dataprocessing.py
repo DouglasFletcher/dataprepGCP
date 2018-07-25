@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from google.cloud import bigquery
+import os
 
 ##########################################################################
 # Process
