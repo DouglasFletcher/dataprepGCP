@@ -142,8 +142,8 @@ if __name__ == '__main__':
 
     # save to table bigquery: note- delete tables if exist before saving?    
     prepareBigQueryData(client, queryVal1, "noaa_gsod_extract")
-    #prepareBigQueryData(client, queryVal2, "citibike_trips_extract")
+    prepareBigQueryData(client, queryVal2, "citibike_trips_extract")
 
     # save to GCS
     saveBigQueryDataToGCP(client, "dir_noaa", "noaa_gsod_extract")
-    #saveBigQueryDataToGCP(client, "dir_bike", "citibike_trips_extract")
+    saveBigQueryDataToGCP(client, "dir_bike", "citibike_trips_extract")
