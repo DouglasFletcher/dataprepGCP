@@ -47,6 +47,7 @@ import os
 DATASET_ID = os.environ.get('DATASET') 
 BUCKET_NAME = os.environ.get('BUCKET')
 PROJECT_ID = os.environ.get('PROJECT')
+LOCATION = os.environ.get('LOCATION')
 
 # queries
 # 1. weather data: precipitation by day in new-york
@@ -79,8 +80,7 @@ queryVal1 = """
 # 2. bike data: no. of rentals per day, by station
 queryVal2 = """
     SELECT start_station_id 
-        , starttime as date
-        #, DATE(starttime) as date
+        , DATE(starttime) as date
         #, DAY(starttime) as da
         #, MONTH(starttime) as mo
         #, YEAR(starttime) as year
@@ -111,7 +111,7 @@ def prepareBigQueryData(client, queryVal, tableId):
     tableRef = client.dataset(DATASET_ID).table(tableId)
     jobConfig.destination = tableRef
     # query result: location is set from global variable?
-    queryJob = client.query(queryVal, location='US', job_config=jobConfig)  
+    queryJob = client.query(queryVal, location=LOCATION, job_config=jobConfig)  
     queryJob.result() 
     print('Query results loaded to table {}'.format(tableRef.path)) 
 
@@ -128,7 +128,7 @@ def saveBigQueryDataToGCP(client, outdir, tableId):
     extractJob = client.extract_table(
         tableRef,
         destinationUri,
-        location='US'
+        location=LOCATION
     )  
     extractJob.result()  
     print('Exported {}:{}.{} to {}'.format(PROJECT_ID, DATASET_ID, tableId, destinationUri))
