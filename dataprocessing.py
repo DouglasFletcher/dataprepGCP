@@ -11,7 +11,7 @@ import os
     # 2. export saved data in staging area go GCS
 ##########################################################################
 
-## Documentation: so far..
+## Documentation: so far queries in bigdata webui..
 
 # a. weather data
     # query 1: 
@@ -39,12 +39,12 @@ import os
     #        GROUP BY start_station_id, etc.
     #        ORDER BY start_station_id, date
 
-# c. population data - does not make sense - yearly agregates
+# c. population data - need to add query
 
 ##########################################################################
 
 # globals:
-DATASET_ID = os.environ.get('DATASET') # <-- same in dependencies.sh script - should make env variable
+DATASET_ID = os.environ.get('DATASET') 
 BUCKET_NAME = os.environ.get('BUCKET')
 PROJECT_ID = os.environ.get('PROJECT')
 
@@ -53,11 +53,11 @@ PROJECT_ID = os.environ.get('PROJECT')
 queryVal1 = """
     SELECT stn, year, mo, da, temp, prcp 
     FROM `bigquery-public-data.noaa_gsod.gsod2018`
-        #, `bigquery-public-data.noaa_gsod.gsod2017`
-        #, `bigquery-public-data.noaa_gsod.gsod2016`
-        #, `bigquery-public-data.noaa_gsod.gsod2015`
-        #, `bigquery-public-data.noaa_gsod.gsod2014`
-        #, `bigquery-public-data.noaa_gsod.gsod2013`
+        , `bigquery-public-data.noaa_gsod.gsod2017`
+        , `bigquery-public-data.noaa_gsod.gsod2016`
+        , `bigquery-public-data.noaa_gsod.gsod2015`
+        , `bigquery-public-data.noaa_gsod.gsod2014`
+        , `bigquery-public-data.noaa_gsod.gsod2013`
     WHERE stn = '725060'    
     """
 

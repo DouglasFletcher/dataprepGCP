@@ -1,12 +1,11 @@
 ## dependencies
 pip install -r requirements.txt
 
-#BUCKET="denolte-showcase-qlikbigdata"
-#PROJECT="denolte-showcase-qlikbigdata"
-DATASET="DATAPROCESS"
-
-BUCKET="qwiklabs-gcp-20478e656e2da2c9"
-PROJECT="qwiklabs-gcp-20478e656e2da2c9"
+export DATASET="DATAPROCESS"
+export BUCKET="qwiklabs-gcp-20478e656e2da2c9"
+export PROJECT="qwiklabs-gcp-20478e656e2da2c9"
+#export BUCKET="denolte-showcase-qlikbigdata"
+#export PROJECT="denolte-showcase-qlikbigdata"
 
 echo "env variables set: BUCKET=$BUCKET PROJECT=$PROJECT DATASET=$DATASET" 
 
