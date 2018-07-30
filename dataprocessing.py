@@ -81,9 +81,9 @@ queryVal1 = """
 queryVal2 = """
     SELECT start_station_id 
         , DATE(starttime) as date
-        , DAY(starttime) as da
-        #, MONTH(starttime) as mo
-        #, YEAR(starttime) as year
+        , EXTRACT(DAY FROM DATE(starttime)) as da
+        , EXTRACT(MONTH FROM DATE(starttime)) as mo
+        , EXTRACT(YEAR FROM DATE(starttime)) as year
         , start_station_name 
         , start_station_latitude
         , start_station_longitude
@@ -93,8 +93,8 @@ queryVal2 = """
     GROUP BY start_station_id
         , date
         , da
-        #, mo
-        #, year
+        , mo
+        , year
         , start_station_name
         , start_station_latitude
         , start_station_longitude  
