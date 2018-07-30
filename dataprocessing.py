@@ -81,7 +81,7 @@ queryVal1 = """
 queryVal2 = """
     SELECT start_station_id 
         , DATE(starttime) as date
-        #, DAY(starttime) as da
+        , DAY(starttime) as da
         #, MONTH(starttime) as mo
         #, YEAR(starttime) as year
         , start_station_name 
@@ -92,7 +92,7 @@ queryVal2 = """
     WHERE start_station_id IS NOT NULL
     GROUP BY start_station_id
         , date
-        #, da
+        , da
         #, mo
         #, year
         , start_station_name
