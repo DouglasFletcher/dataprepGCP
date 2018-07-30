@@ -10,6 +10,7 @@ echo "env variables set: BUCKET=$BUCKET PROJECT=$PROJECT DATASET=$DATASET LOCATI
 ## delete existing data in cloud storage
 gsutil -m rm -rf gs://$BUCKET/tmp/dir_noaa/output.csv
 gsutil -m rm -rf gs://$BUCKET/tmp/dir_bike/output.csv
+gsutil -m rm -rf gs://$BUCKET/tmp/dir_pop/output.csv
 
 ## set up datasets in bigquery
 echo y | bq mk $DATASET
