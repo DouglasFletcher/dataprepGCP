@@ -1,12 +1,12 @@
 ## dependencies
-pip install -r requirements.txt
+#pip install -r requirements.txt
 
 export DATASET="DATAPROCESS"
-export BUCKET="qwiklabs-gcp-20478e656e2da2c9"
-export PROJECT="qwiklabs-gcp-20478e656e2da2c9"
-export LOCATION="US"
+export BUCKET="qwiklabs-gcp-f0ee0f40b36f26ad"
 #export BUCKET="denolte-showcase-qlikbigdata"
+export PROJECT="qwiklabs-gcp-f0ee0f40b36f26ad"
 #export PROJECT="denolte-showcase-qlikbigdata"
+export LOCATION="US"
 
 echo "env variables set: BUCKET=$BUCKET PROJECT=$PROJECT DATASET=$DATASET LOCATION=$LOCATION" 
 
@@ -25,5 +25,5 @@ cd /dataprepGCP
 python dataprocessing.py 
 
 # remove datasets in bigquery
-echo y | bq rm $DATASET 
+echo y | bq rm $DATASET --force 
 
