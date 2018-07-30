@@ -40,6 +40,13 @@ import os
     #        ORDER BY start_station_id, date
 
 # c. population data - need to add query
+	# SELECT zipcode
+  	# 	, geo_id
+  	# 	, minimum_age
+  	# 	, maximum_age
+  	# 	, gender
+  	# 	, population 
+	# FROM [bigquery-public-data:census_bureau_usa.population_by_zip_2010]
 
 ##########################################################################
 
@@ -101,6 +108,17 @@ queryVal2 = """
     ORDER BY start_station_id, date
     """
 
+# 3. population data: geoid, with population, age range
+queryVal3 = """
+	SELECT zipcode
+  		, geo_id
+  		, minimum_age
+  		, maximum_age
+  		, gender
+  		, population 
+	FROM 'bigquery-public-data:census_bureau_usa.population_by_zip_2010'
+	"""
+
 # functions
 def prepareBigQueryData(client, queryVal, tableId):
     """
@@ -143,7 +161,9 @@ if __name__ == '__main__':
     # save to table bigquery: note- delete tables if exist before saving?    
     prepareBigQueryData(client, queryVal1, "noaa_gsod_extract")
     prepareBigQueryData(client, queryVal2, "citibike_trips_extract")
+    prepareBigQueryData(client, queryVal3, "census_pop_extract")
 
     # save to GCS
     saveBigQueryDataToGCP(client, "dir_noaa", "noaa_gsod_extract")
     saveBigQueryDataToGCP(client, "dir_bike", "citibike_trips_extract")
+    saveBigQueryDataToGCP(client, "dir_pop", "census_pop_extract")
