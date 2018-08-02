@@ -56,8 +56,16 @@ import os
     #    , start_station_longitude  
     #ORDER BY start_station_id, date
 
-    # query 2:
-    #SELECT
+    # query 2: get station metadata information z.B. no. available bikes
+    #SELECT station_id 
+    #    , name
+    #    , short_name 
+    #    , latitude 
+    #    , longitude 
+    #    , region_id 
+    #    , num_bikes_available 
+    #    , is_renting 
+    #FROM `bigquery-public-data.new_york_citibike.citibike_stations`
 
 
 # c. population data - need to add query
@@ -141,6 +149,17 @@ queryVal2 = """
     """
 
 # 3. bike station metadata (e.g. possible rentals)
+queryVal3 = """
+    SELECT station_id 
+        , name
+        , short_name 
+        , latitude 
+        , longitude 
+        , region_id 
+        , num_bikes_available 
+        , is_renting 
+    FROM `bigquery-public-data.new_york_citibike.citibike_stations`
+    """
 
 # 4. population data: geoid, with population, age range
 queryVal4 = """
@@ -195,11 +214,11 @@ if __name__ == '__main__':
     # save to table bigquery: note- delete tables if exist before saving?    
     prepareBigQueryData(client, queryVal1, "noaa_gsod_extract")
     prepareBigQueryData(client, queryVal2, "citibike_trips_extract")
-    #prepareBigQueryData(client, queryVal3, "citibike_statmeta_extract")
+    prepareBigQueryData(client, queryVal3, "citibike_statmeta_extract")
     prepareBigQueryData(client, queryVal4, "census_pop_extract")
 
     # save to GCS
     saveBigQueryDataToGCP(client, "dir_noaa", "noaa_gsod_extract")
     saveBigQueryDataToGCP(client, "dir_bike", "citibike_trips_extract")
-    #saveBigQueryDataToGCP(client, "dir_bikestat", "citibike_statmeta_extract")
+    saveBigQueryDataToGCP(client, "dir_statmeta", "citibike_statmeta_extract")
     saveBigQueryDataToGCP(client, "dir_pop", "census_pop_extract")
