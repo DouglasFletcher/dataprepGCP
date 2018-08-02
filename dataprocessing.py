@@ -30,14 +30,35 @@ import os
     # FROM `bigquery-public-data.noaa_gsod.gsod2018` <-- for 15,16,17,18
     # WHERE stn = '725060' <-- from above query
 
-# b. bike data
+# b. bike data - rentals
     # query 1:
-    # --> b. get a count of active rentals from stations
-    # SELECT start_station_id, etc., , sum(1) as rentCounter
-    #        FROM [bigquery-public-data:new_york_citibike.citibike_trips] 
-    #        WHERE start_station_id IS NOT NULL
-    #        GROUP BY start_station_id, etc.
-    #        ORDER BY start_station_id, date
+    #SELECT start_station_id 
+    #    , DATE(starttime) as date
+    #    , EXTRACT(DAY FROM DATE(starttime)) as da
+    #    , EXTRACT(MONTH FROM DATE(starttime)) as mo
+    #    , EXTRACT(YEAR FROM DATE(starttime)) as year
+    #    , usertyp
+    #    , start_station_name 
+    #    , start_station_latitude
+    #    , start_station_longitude
+    #    , sum(tripduration) as totalSecondsRented
+    #    , sum(1) as rentCounter
+    #FROM `bigquery-public-data.new_york_citibike.citibike_trips` 
+    #WHERE start_station_id IS NOT NULL
+    #GROUP BY start_station_id
+    #    , date
+    #    , da
+    #    , mo
+    #    , year
+    #    , usertype
+    #    , start_station_name
+    #    , start_station_latitude
+    #    , start_station_longitude  
+    #ORDER BY start_station_id, date
+
+    # query 2:
+    #SELECT
+
 
 # c. population data - need to add query
 	# SELECT zipcode
@@ -99,9 +120,11 @@ queryVal2 = """
         , EXTRACT(DAY FROM DATE(starttime)) as da
         , EXTRACT(MONTH FROM DATE(starttime)) as mo
         , EXTRACT(YEAR FROM DATE(starttime)) as year
+        , usertyp
         , start_station_name 
         , start_station_latitude
         , start_station_longitude
+        , sum(tripduration) as totalSecondsRented
         , sum(1) as rentCounter
     FROM `bigquery-public-data.new_york_citibike.citibike_trips` 
     WHERE start_station_id IS NOT NULL
@@ -110,14 +133,17 @@ queryVal2 = """
         , da
         , mo
         , year
+        , usertype
         , start_station_name
         , start_station_latitude
         , start_station_longitude  
     ORDER BY start_station_id, date
     """
 
-# 3. population data: geoid, with population, age range
-queryVal3 = """
+# 3. bike station metadata (e.g. possible rentals)
+
+# 4. population data: geoid, with population, age range
+queryVal4 = """
 	SELECT zipcode
   		, geo_id
   		, minimum_age
@@ -169,9 +195,11 @@ if __name__ == '__main__':
     # save to table bigquery: note- delete tables if exist before saving?    
     prepareBigQueryData(client, queryVal1, "noaa_gsod_extract")
     prepareBigQueryData(client, queryVal2, "citibike_trips_extract")
-    prepareBigQueryData(client, queryVal3, "census_pop_extract")
+    #prepareBigQueryData(client, queryVal3, "citibike_statmeta_extract")
+    prepareBigQueryData(client, queryVal4, "census_pop_extract")
 
     # save to GCS
     saveBigQueryDataToGCP(client, "dir_noaa", "noaa_gsod_extract")
     saveBigQueryDataToGCP(client, "dir_bike", "citibike_trips_extract")
+    #saveBigQueryDataToGCP(client, "dir_bikestat", "citibike_statmeta_extract")
     saveBigQueryDataToGCP(client, "dir_pop", "census_pop_extract")
