@@ -120,7 +120,7 @@ queryVal2 = """
         , EXTRACT(DAY FROM DATE(starttime)) as da
         , EXTRACT(MONTH FROM DATE(starttime)) as mo
         , EXTRACT(YEAR FROM DATE(starttime)) as year
-        , usertyp
+        , usertype
         , start_station_name 
         , start_station_latitude
         , start_station_longitude
