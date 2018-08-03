@@ -192,7 +192,7 @@ def saveBigQueryDataToGCP(client, outdir, tableId):
     save resultset from prepareBigQueryData to google cloud storage
     """
     # def save locations
-    destinationUri = 'gs://{}/table/{}/{}'.format(BUCKET_NAME, outdir, 'output.csv')
+    destinationUri = 'gs://{}/tables/{}/{}'.format(BUCKET_NAME, outdir, 'output.csv')
     datasetRef = client.dataset(DATASET_ID, project=PROJECT_ID)
     tableRef = datasetRef.table(tableId)
     # extract to GCS
