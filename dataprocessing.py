@@ -192,7 +192,7 @@ def saveBigQueryDataToGCP(client, outdir, tableId):
     save resultset from prepareBigQueryData to google cloud storage
     """
     # def save locations
-    destinationUri = 'gs://{}/tmp/{}/{}'.format(BUCKET_NAME, outdir, 'output.csv')
+    destinationUri = 'gs://{}/table/{}/{}'.format(BUCKET_NAME, outdir, 'output.csv')
     datasetRef = client.dataset(DATASET_ID, project=PROJECT_ID)
     tableRef = datasetRef.table(tableId)
     # extract to GCS
@@ -218,7 +218,7 @@ if __name__ == '__main__':
     prepareBigQueryData(client, queryVal4, "census_pop_extract")
 
     # save to GCS
-    saveBigQueryDataToGCP(client, "dir_noaa", "noaa_gsod_extract")
-    saveBigQueryDataToGCP(client, "dir_bike", "citibike_trips_extract")
-    saveBigQueryDataToGCP(client, "dir_statmeta", "citibike_statmeta_extract")
-    saveBigQueryDataToGCP(client, "dir_pop", "census_pop_extract")
+    saveBigQueryDataToGCP(client, "weatherdata", "noaa_gsod_extract")
+    saveBigQueryDataToGCP(client, "bikedata", "citibike_trips_extract")
+    saveBigQueryDataToGCP(client, "statmetadata", "citibike_statmeta_extract")
+    saveBigQueryDataToGCP(client, "censsudata", "census_pop_extract")

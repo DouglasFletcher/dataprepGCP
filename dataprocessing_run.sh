@@ -8,10 +8,10 @@ export LOCATION="US"
 echo "env variables set: BUCKET=$BUCKET PROJECT=$PROJECT DATASET=$DATASET LOCATION=$LOCATION" 
 
 ## delete existing data in cloud storage
-gsutil -m rm -rf gs://$BUCKET/tmp/dir_noaa/output.csv
-gsutil -m rm -rf gs://$BUCKET/tmp/dir_bike/output.csv
-gsutil -m rm -rf gs://$BUCKET/tmp/dir_statmeta/output.csv
-gsutil -m rm -rf gs://$BUCKET/tmp/dir_pop/output.csv
+gsutil -m rm -rf gs://$BUCKET/table/weatherdata/output.csv
+gsutil -m rm -rf gs://$BUCKET/table/bikedata/output.csv
+gsutil -m rm -rf gs://$BUCKET/table/statmetadata/output.csv
+gsutil -m rm -rf gs://$BUCKET/table/censsudata/output.csv
 
 ## set up datasets in bigquery
 echo y | bq mk $DATASET
