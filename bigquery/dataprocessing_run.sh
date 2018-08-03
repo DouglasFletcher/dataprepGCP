@@ -11,7 +11,7 @@ echo "env variables set: BUCKET=$BUCKET PROJECT=$PROJECT DATASET=$DATASET LOCATI
 gsutil -m rm -rf gs://$BUCKET/tables/weatherdata/output.csv
 gsutil -m rm -rf gs://$BUCKET/tables/bikedata/output.csv
 gsutil -m rm -rf gs://$BUCKET/tables/statmetadata/output.csv
-gsutil -m rm -rf gs://$BUCKET/tables/censsudata/output.csv
+gsutil -m rm -rf gs://$BUCKET/tables/censusdata/output.csv
 
 ## set up datasets in bigquery
 echo y | bq mk $DATASET
