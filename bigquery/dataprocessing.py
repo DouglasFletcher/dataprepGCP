@@ -122,7 +122,7 @@ queryVal1 = """
     """
 
 # 2. bike data: no. of rentals per day, by station
-queryVal2 = """
+queryVal2a = """
     SELECT start_station_id 
         , DATE(starttime) as date
         , EXTRACT(DAY FROM DATE(starttime)) as da
@@ -146,6 +146,28 @@ queryVal2 = """
         , start_station_latitude
         , start_station_longitude  
     ORDER BY start_station_id, date
+    """
+
+queryVal2b = """
+    SELECT
+        tripduration
+        , starttime
+        , stoptime
+        , start_station_id
+        , start_station_name
+        , start_station_latitude
+        , start_station_longitude
+        , end_station_id
+        , end_station_name
+        , end_station_latitude
+        , end_station_longitude
+        , bikeid
+        , usertype
+        , birth_year
+        , gender
+        , customer_plan
+    FROM `bigquery-public-data.new_york_citibike.citibike_trips`
+    LIMIT 10000
     """
 
 # 3. bike station metadata (e.g. possible rentals)
@@ -213,12 +235,14 @@ if __name__ == '__main__':
 
     # save to table bigquery: note- delete tables if exist before saving?    
     prepareBigQueryData(client, queryVal1, "noaa_gsod_extract")
-    prepareBigQueryData(client, queryVal2, "citibike_trips_extract")
+    prepareBigQueryData(client, queryVal2a, "citibike_trips_extract")
+    prepareBigQueryData(client, queryVal2b, "citibike_path_extract")
     prepareBigQueryData(client, queryVal3, "citibike_statmeta_extract")
     prepareBigQueryData(client, queryVal4, "census_pop_extract")
 
     # save to GCS
     saveBigQueryDataToGCP(client, "weatherdata", "noaa_gsod_extract")
     saveBigQueryDataToGCP(client, "bikedata", "citibike_trips_extract")
+    saveBigQueryDataToGCP(client, "bikepathdata", "citibike_path_extract")
     saveBigQueryDataToGCP(client, "statmetadata", "citibike_statmeta_extract")
     saveBigQueryDataToGCP(client, "censusdata", "census_pop_extract")
