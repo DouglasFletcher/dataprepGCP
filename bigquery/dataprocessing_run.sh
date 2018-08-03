@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## environment variables
 export DATASET="DATAPROCESS"
 #export BUCKET="qwiklabs-gcp-f0ee0f40b36f26ad"

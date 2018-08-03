@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ## dependencies
 pip install -r requirements.txt
 
