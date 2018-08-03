@@ -221,4 +221,4 @@ if __name__ == '__main__':
     saveBigQueryDataToGCP(client, "weatherdata", "noaa_gsod_extract")
     saveBigQueryDataToGCP(client, "bikedata", "citibike_trips_extract")
     saveBigQueryDataToGCP(client, "statmetadata", "citibike_statmeta_extract")
-    saveBigQueryDataToGCP(client, "censsudata", "census_pop_extract")
+    saveBigQueryDataToGCP(client, "censusdata", "census_pop_extract")
