@@ -2,7 +2,7 @@
 
 
 
-def geocodePoint(fileName, colXCord, colYCord);
+def geocodePoint(dirLoc, fileName, colXCord, colYCord);
  	"""
     geocode cloud storage data with x,y coordinates to give geoid e.g. zipcode
     """
