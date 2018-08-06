@@ -1,5 +1,6 @@
 
-import 
+import censusgeocode as cg
+
 
 
 def geocodePoint(dirLoc, fileName, colXCord, colYCord);
@@ -11,7 +12,12 @@ def geocodePoint(dirLoc, fileName, colXCord, colYCord);
 	# go through each row in file and merge geoId, with new names
 
 	# override file with same reference
+	result = cg.coordinates(x=-76, y=41)
+	print(result)
 
 
+# main 
+if __name__ == '__main__':
+    geocodePoint("","","","")
 
 
