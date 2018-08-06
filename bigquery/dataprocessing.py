@@ -88,37 +88,41 @@ LOCATION = os.environ.get('LOCATION')
 # queries
 # 1. weather data: precipitation by day in new-york
 queryVal1 = """
-    SELECT stn, year, mo, da
-    , IF( sndp = 999.9, null, sndp) sndp 
-    , IF( prcp = 99.99, null, prcp) prcp
-    , IF( temp = 9999.9, null, temp) temp
-    , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
-    FROM `bigquery-public-data.noaa_gsod.gsod2018`
-    WHERE stn = '725060' 
-    UNION ALL
-    SELECT stn, year, mo, da
-    , IF( sndp = 999.9, null, sndp) sndp 
-    , IF( prcp = 99.99, null, prcp) prcp
-    , IF( temp = 9999.9, null, temp) temp
-    , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
-    FROM `bigquery-public-data.noaa_gsod.gsod2017`
-    WHERE stn = '725060' 
-    UNION ALL
-    SELECT stn, year, mo, da
-    , IF( sndp = 999.9, null, sndp) sndp 
-    , IF( prcp = 99.99, null, prcp) prcp
-    , IF( temp = 9999.9, null, temp) temp
-    , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
-    FROM `bigquery-public-data.noaa_gsod.gsod2016`
-    WHERE stn = '725060' 
-    UNION ALL
-    SELECT stn, year, mo, da
-    , IF( sndp = 999.9, null, sndp) sndp 
-    , IF( prcp = 99.99, null, prcp) prcp
-    , IF( temp = 9999.9, null, temp) temp
-    , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
-    FROM `bigquery-public-data.noaa_gsod.gsod2015`
-    WHERE stn = '725060'
+    SELECT d1.*, d2.lat, d2.lon FROM ( 
+        SELECT stn, wban, year, mo, da
+        , IF( sndp = 999.9, null, sndp) sndp 
+        , IF( prcp = 99.99, null, prcp) prcp
+        , IF( temp = 9999.9, null, temp) temp
+        , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
+        FROM `bigquery-public-data.noaa_gsod.gsod2018`
+        WHERE stn = '725060' 
+        UNION ALL
+        SELECT stn, wban, year, mo, da
+        , IF( sndp = 999.9, null, sndp) sndp 
+        , IF( prcp = 99.99, null, prcp) prcp
+        , IF( temp = 9999.9, null, temp) temp
+        , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
+        FROM `bigquery-public-data.noaa_gsod.gsod2017`
+        WHERE stn = '725060' 
+        UNION ALL
+        SELECT stn, wban, year, mo, da
+        , IF( sndp = 999.9, null, sndp) sndp 
+        , IF( prcp = 99.99, null, prcp) prcp
+        , IF( temp = 9999.9, null, temp) temp
+        , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
+        FROM `bigquery-public-data.noaa_gsod.gsod2016`
+        WHERE stn = '725060' 
+        UNION ALL
+        SELECT stn, wban, year, mo, da
+        , IF( sndp = 999.9, null, sndp) sndp 
+        , IF( prcp = 99.99, null, prcp) prcp
+        , IF( temp = 9999.9, null, temp) temp
+        , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
+        FROM `bigquery-public-data.noaa_gsod.gsod2015`
+        WHERE stn = '725060'
+    ) AS d1 
+    LEFT JOIN `bigquery-public-data.noaa_gsod.stations` d2 
+    ON d1.wban = d2.wban  
     """
 
 # 2. bike data: no. of rentals per day, by station
