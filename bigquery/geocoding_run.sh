@@ -1,4 +1,4 @@
 #!/bin/bash
 
 ## geocode test
-python geocoding.py
+python3 geocoding.py
