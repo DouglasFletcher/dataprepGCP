@@ -1,12 +1,9 @@
-
 import censusgeocode as cg
 
-
-
-def geocodePoint(dirLoc, fileName, colXCord, colYCord);
- 	"""
-    geocode cloud storage data with x,y coordinates to give geoid e.g. zipcode
-    """
+def geocodePoint(dirLoc, fileName, colXCord, colYCord):
+	"""
+	geocode cloud storage data with x,y coordinates to give geoid e.g. zipcode
+	"""
 	# read file as pointer value
 
 	# go through each row in file and merge geoId, with new names
@@ -18,6 +15,6 @@ def geocodePoint(dirLoc, fileName, colXCord, colYCord);
 
 # main 
 if __name__ == '__main__':
-    geocodePoint("","","","")
+	geocodePoint("","","","")
 
 
