@@ -182,8 +182,18 @@ queryVal3 = """
         , latitude 
         , longitude 
         , region_id 
+        , rental_methods
+        , capacity
         , num_bikes_available 
-        , is_renting 
+        , num_bikes_disabled
+        , num_docks_available
+        , num_docks_disabled
+        , is_installed
+        , is_renting
+        , is_returning
+        , last_reported
+        , eightd_has_available_keys
+        , eightd_has_key_dispenser
     FROM `bigquery-public-data.new_york_citibike.citibike_stations`
     """
 
