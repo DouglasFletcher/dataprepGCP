@@ -80,9 +80,22 @@ CREATE EXTERNAL TABLE IF NOT EXISTS statmetadata (
    ,region_id INT
    ,num_bikes_available INT
    ,is_renting BOOLEAN
+   ,rental_methods STRING
+   ,capacity INT
+   ,num_bikes_disabled INT
+   ,num_docks_available INT
+   ,num_docks_disabled INT
+   ,is_installed BOOLEAN
+   ,is_returning BOOLEAN
+   ,last_reported TIMESTAMP
+   ,eightd_has_available_keys BOOLEAN
+   ,eightd_has_key_dispenser BOOLEAN
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
 LOCATION 'gs://denolte-showcase-qlikbigdata/tables/statmetadata'
 tblproperties ("skip.header.line.count"="1");
+
+
+
