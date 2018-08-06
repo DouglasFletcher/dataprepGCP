@@ -20,7 +20,7 @@ gsutil -m rm -rf gs://$BUCKET/tables/censusdata/output.csv
 echo y | bq mk $DATASET
 
 ## run application
-python3 dataprocessing.py 
+python dataprocessing.py 
 
 ## remove datasets in bigquery
 echo y | bq rm -rf $DATASET
