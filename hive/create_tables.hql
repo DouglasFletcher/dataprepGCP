@@ -17,6 +17,30 @@ STORED AS TEXTFILE
 LOCATION 'gs://denolte-showcase-qlikbigdata/tables/bikedata'
 tblproperties ("skip.header.line.count"="1");
 
+CREATE EXTERNAL TABLE IF NOT EXISTS bikepathdata (
+	tripduration INT
+   ,starttime STRING
+   ,stoptime STRING
+   ,start_station_id INT
+   ,start_station_name STRING
+   ,start_station_latitude DOUBLE
+   ,start_station_longitude DOUBLE
+   ,end_station_id INT
+   ,end_station_name STRING
+   ,end_station_latitude DOUBLE
+   ,end_station_longitude DOUBLE
+   ,bikeid INT
+   ,usertype STRING
+   ,birth_year INT
+   ,gender STRING
+   ,customer_plan STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION 'gs://denolte-showcase-qlikbigdata/tables/bikepathdata'
+tblproperties ("skip.header.line.count"="1");
+
 CREATE EXTERNAL TABLE IF NOT EXISTS weatherdata (
 	station INT
    ,year INT
