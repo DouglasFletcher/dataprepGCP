@@ -87,7 +87,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS statmetadata (
    ,num_docks_disabled INT
    ,is_installed BOOLEAN
    ,is_returning BOOLEAN
-   ,last_reported TIMESTAMP
+   ,last_reported STRING
    ,eightd_has_available_keys BOOLEAN
    ,eightd_has_key_dispenser BOOLEAN
 )
