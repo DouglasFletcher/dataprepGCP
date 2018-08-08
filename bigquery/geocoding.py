@@ -1,6 +1,5 @@
 
 import censusgeocode as cg
-from pyspark.sql import SparkSession
 import os
 import time
 import cloudstorage as gcs
