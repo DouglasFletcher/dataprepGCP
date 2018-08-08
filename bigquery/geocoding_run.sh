@@ -1,4 +1,4 @@
 #!/bin/bash
 
 ## geocode test
-python geocoding.py
+gcloud dataproc jobs submit pyspark --cluster master geocoding.py
