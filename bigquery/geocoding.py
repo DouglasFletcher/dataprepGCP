@@ -45,8 +45,8 @@ def geocodeOhneSparkGcp(fileDir, fileName, colX, colY):
 	outfile = gcs.open(writFile,'w', content_type='text/plain')
 	# contents destination
 	gcs_file = gcs.open(readFile)
-  	contents = gcs_file.read()
-  	gcs_file.close()
+	contents = gcs_file.read()
+	gcs_file.close()
 	# geocode & save data
 	with contents as ins:
 		errorCnt = 0

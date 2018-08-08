@@ -6,4 +6,4 @@
 export BUCKET="denolte-showcase-qlikbigdata"
 export PROJECT="denolte-showcase-qlikbigdata"
 
-python geocoding.py
+python3 geocoding.py
