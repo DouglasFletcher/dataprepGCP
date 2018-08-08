@@ -1,6 +1,10 @@
-import censusgeocode as cg
 
-def geocodePoint(dirLoc, fileName, colXCord, colYCord):
+import censusgeocode as cg
+from pyspark.sql import SparkSession
+
+
+
+def geocodePoint(rdd, colXCord, colYCord):
 	"""
 	geocode cloud storage data with x,y coordinates to give geoid e.g. zipcode
 	"""
@@ -15,6 +19,15 @@ def geocodePoint(dirLoc, fileName, colXCord, colYCord):
 
 # main 
 if __name__ == '__main__':
-	geocodePoint("","","","")
+
+	# instantiate spark instance
+	spark = SparkSession\
+		.builder\
+		.appName("geocoding")\
+		.getOrCreate()
+
+	geocodePoint("","","")
+
+	spark.stop()
 
 
