@@ -171,7 +171,7 @@ queryVal2b = """
         , gender
         , customer_plan
     FROM `bigquery-public-data.new_york_citibike.citibike_trips`
-    LIMIT 1000000
+    LIMIT 10000000
     """
 
 # 3. bike station metadata (e.g. possible rentals)
