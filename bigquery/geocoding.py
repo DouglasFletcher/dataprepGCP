@@ -2,7 +2,7 @@
 from geopy.geocoders import Nominatim
 import os
 import time
-
+from geopy.exc import GeocoderServiceError
 
 
 def geocodeOhneSpark(fileDir, fileName, colX, colY):
@@ -35,9 +35,12 @@ def geocodeOhneSpark(fileDir, fileName, colX, colY):
 					# API can handle certain request limit / sec.
 					if i % 150 == 0:
 						time.sleep(150)
-				except KeyError:
+				except GeocoderServiceError:
 					print("skipping line %s" % i)
 					errorCnt += 1
+					time.sleep(150)
+
+
 	print("missed lines - parse errors %s" % errorCnt)
 	ins.close()
 	outfile.close()
