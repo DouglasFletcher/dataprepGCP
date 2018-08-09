@@ -50,12 +50,25 @@ CREATE EXTERNAL TABLE IF NOT EXISTS weatherdata (
    ,prcp DOUBLE
    ,temp DOUBLE
    ,wdsp DOUBLE
+   ,lat DOUBLE
+   ,lon DOUBLE
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION 'gs://denolte-showcase-qlikbigdata/tables/weatherdata/output.csv'
+tblproperties ("skip.header.line.count"="1");
+
+CREATE EXTERNAL TABLE IF NOT EXISTS weathermeta (
+   station INT
+   ,lon DOUBLE
+   ,lat DOUBLE
    ,GEOID STRING
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 'gs://denolte-showcase-qlikbigdata/tables/weatherdata/output_geocoded.csv'
+LOCATION 'gs://denolte-showcase-qlikbigdata/tables/weathermeta/output_geocoded.csv'
 tblproperties ("skip.header.line.count"="1");
 
 CREATE EXTERNAL TABLE IF NOT EXISTS censusdata (
