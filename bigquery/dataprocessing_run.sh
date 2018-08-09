@@ -11,6 +11,7 @@ echo "env variables set: BUCKET=$BUCKET PROJECT=$PROJECT DATASET=$DATASET LOCATI
 
 ## delete existing data in cloud storage
 gsutil -m rm -rf gs://$BUCKET/tables/weatherdata/output.csv
+gsutil -m rm -rf gs://$BUCKET/tables/weathermeta/output.csv
 gsutil -m rm -rf gs://$BUCKET/tables/bikedata/output.csv
 gsutil -m rm -rf gs://$BUCKET/tables/bikepathdata/output.csv
 gsutil -m rm -rf gs://$BUCKET/tables/statmetadata/output.csv
