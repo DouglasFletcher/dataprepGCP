@@ -14,71 +14,26 @@ import os
 ## Documentation: so far queries in bigdata webui..
 
 # a. weather data
-    # query 1: 
+    # weather station values
     # --> relevant weather stations in new-york
     #SELECT usaf, wban, name, country, state, call  
     #FROM [bigquery-public-data:noaa_gsod.stations] 
     #WHERE REGEXP_MATCH(name, 'NEW YORK')
     # --> result {"usaf":"725060", "wban", "94728", "name", "NEW YORK CITY CENTRAL PARK"}
     
-    # query 2:
-    # SELECT stn, year, mo, da
-    # , IF( sndp = 999.9, null, sndp) sndp 
-    # , IF( prcp = 99.99, null, prcp) prcp
-    # , IF( temp = 9999.9, null, temp) temp
-    # , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
-    # FROM `bigquery-public-data.noaa_gsod.gsod2018` <-- for 15,16,17,18
-    # WHERE stn = '725060' <-- from above query
+    # query1a: get weather data with geocoordinates merged from station metadata 
 
-    # query 3: 
-    # SELECT stn
+    # query1b: station metadata
 
 # b. bike data - rentals
-    # query 1:
-    #SELECT start_station_id 
-    #    , DATE(starttime) as date
-    #    , EXTRACT(DAY FROM DATE(starttime)) as da
-    #    , EXTRACT(MONTH FROM DATE(starttime)) as mo
-    #    , EXTRACT(YEAR FROM DATE(starttime)) as year
-    #    , usertyp
-    #    , start_station_name 
-    #    , start_station_latitude
-    #    , start_station_longitude
-    #    , sum(tripduration) as totalSecondsRented
-    #    , sum(1) as rentCounter
-    #FROM `bigquery-public-data.new_york_citibike.citibike_trips` 
-    #WHERE start_station_id IS NOT NULL
-    #GROUP BY start_station_id
-    #    , date
-    #    , da
-    #    , mo
-    #    , year
-    #    , usertype
-    #    , start_station_name
-    #    , start_station_latitude
-    #    , start_station_longitude  
-    #ORDER BY start_station_id, date
+    # query 2a: aggreation of bikedata i.e. number of rentals per day
 
-    # query 2: get station metadata information z.B. no. available bikes
-    #SELECT station_id 
-    #    , name
-    #    , short_name 
-    #    , latitude 
-    #    , longitude 
-    #    , region_id 
-    #    , num_bikes_available 
-    #    , is_renting 
-    #FROM `bigquery-public-data.new_york_citibike.citibike_stations`
+    # query 2b: bike data
 
+    # query 2c: path of bike data
 
-# c. population data - need to add query
-	# SELECT zipcode
-  	# 	, geo_id
-  	# 	, minimum_age
-  	# 	, maximum_age
-  	# 	, gender
-  	# 	, population 
-	# FROM [bigquery-public-data:census_bureau_usa.population_by_zip_2010]
+# c. population data - census
+    # query3: census data
 
 ##########################################################################
 
@@ -184,7 +139,7 @@ queryVal2b = """
     """
 
 # 3. bike station metadata (e.g. possible rentals)
-queryVal3 = """
+queryVal2c = """
     SELECT station_id 
         , name
         , short_name 
@@ -207,7 +162,7 @@ queryVal3 = """
     """
 
 # 4. population data: geoid, with population, age range
-queryVal4 = """
+queryVal3 = """
 	SELECT zipcode
   		, geo_id
   		, minimum_age
@@ -262,8 +217,8 @@ if __name__ == '__main__':
     prepareBigQueryData(client, queryVal1b, "noaa_metadata_extract")
     prepareBigQueryData(client, queryVal2a, "citibike_trips_extract")
     prepareBigQueryData(client, queryVal2b, "citibike_path_extract")
-    prepareBigQueryData(client, queryVal3, "citibike_statmeta_extract")
-    prepareBigQueryData(client, queryVal4, "census_pop_extract")
+    prepareBigQueryData(client, queryVal2c, "citibike_statmeta_extract")
+    prepareBigQueryData(client, queryVal3, "census_pop_extract")
 
     # save to GCS
     saveBigQueryDataToGCP(client, "weatherdata", "noaa_gsod_extract")
