@@ -33,8 +33,9 @@ def geocodeOhneSpark(fileDir, fileName, colX, colY):
 					outfile.write(lineClean+","+response.raw["address"]["postcode"]+"\n")
 					time.sleep(.300)
 					# API can handle certain request limit / sec.
-					if i == 300:
-						time.sleep(60)
+					if i % 300 == 0:
+						time.sleep(120)
+						geolocator = Nominatim(user_agent="another-app")
 				except KeyError:
 					print("skipping line %s" % i)
 					errorCnt += 1
