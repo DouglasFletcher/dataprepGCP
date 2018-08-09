@@ -226,6 +226,7 @@ def prepareBigQueryData(client, queryVal, tableId):
 def saveBigQueryDataToGCP(client, outdir, tableId):
     """
     save resultset from prepareBigQueryData to google cloud storage
+    e.g. gs:/denolte-showcase-qlikbigdata/tables/bikedata/output.csv
     """
     # def save locations
     destinationUri = 'gs://{}/tables/{}/{}'.format(BUCKET_NAME, outdir, 'output.csv')
