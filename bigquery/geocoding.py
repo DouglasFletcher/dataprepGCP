@@ -6,6 +6,7 @@ import time
 def geocodeOhneSpark(fileDir, fileName, colX, colY):
 	# file reference
 	fileRef = fileDir + fileName
+	print("geocoding file: {}".format(fileRef))
 	outfile = open(fileRef + "_geocoded" + ".csv","w") 
 	with open(fileRef + ".csv", "r") as ins:
 		errorCnt = 0
@@ -36,10 +37,9 @@ def geocodeOhneSpark(fileDir, fileName, colX, colY):
 if __name__ == '__main__':
 	t = time.clock()
 	cwd = os.getcwd()
-	geocodeOhneSpark(cwd + "/weathermeta/","output","lon","lat")
-	geocodeOhneSpark(cwd + "/statmetadata/","output","longitude","latitude")
 
+	geocodeOhneSpark(cwd + "/weathermeta/","output","lon","lat")
 	print(format(time.clock()-t, ".2f"))
 
-
-
+	geocodeOhneSpark(cwd + "/statmetadata/","output","longitude","latitude")
+	print(format(time.clock()-t, ".2f"))
