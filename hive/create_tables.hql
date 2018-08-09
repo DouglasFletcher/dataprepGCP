@@ -50,11 +50,12 @@ CREATE EXTERNAL TABLE IF NOT EXISTS weatherdata (
    ,prcp DOUBLE
    ,temp DOUBLE
    ,wdsp DOUBLE
+   ,GEOID STRING
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 'gs://denolte-showcase-qlikbigdata/tables/weatherdata'
+LOCATION 'gs://denolte-showcase-qlikbigdata/tables/weatherdata/output_geocoded.csv'
 tblproperties ("skip.header.line.count"="1");
 
 CREATE EXTERNAL TABLE IF NOT EXISTS censusdata (
@@ -90,11 +91,12 @@ CREATE EXTERNAL TABLE IF NOT EXISTS statmetadata (
    ,last_reported STRING
    ,eightd_has_available_keys BOOLEAN
    ,eightd_has_key_dispenser BOOLEAN
+   ,GEOID STRING
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 'gs://denolte-showcase-qlikbigdata/tables/statmetadata'
+LOCATION 'gs://denolte-showcase-qlikbigdata/tables/statmetadata/output_geocoded.csv'
 tblproperties ("skip.header.line.count"="1");
 
 
