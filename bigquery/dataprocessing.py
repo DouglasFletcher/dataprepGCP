@@ -30,6 +30,9 @@ import os
     # FROM `bigquery-public-data.noaa_gsod.gsod2018` <-- for 15,16,17,18
     # WHERE stn = '725060' <-- from above query
 
+    # query 3: 
+    # SELECT stn
+
 # b. bike data - rentals
     # query 1:
     #SELECT start_station_id 
@@ -87,7 +90,7 @@ LOCATION = os.environ.get('LOCATION')
 
 # queries
 # 1. weather data: precipitation by day in new-york
-queryVal1 = """
+queryVal1a = """
     SELECT d1.*, d2.lat, d2.lon FROM ( 
         SELECT stn, wban, year, mo, da
         , IF( sndp = 999.9, null, sndp) sndp 
@@ -123,6 +126,12 @@ queryVal1 = """
     ) AS d1 
     LEFT JOIN `bigquery-public-data.noaa_gsod.stations` d2 
     ON d1.wban = d2.wban  
+    """
+
+queryVal1b = """
+    SELECT UNIQUE stn, lat, lon
+    FROM `bigquery-public-data.noaa_gsod.stations`
+    WHERE stn = '725060'
     """
 
 # 2. bike data: no. of rentals per day, by station
@@ -249,7 +258,8 @@ if __name__ == '__main__':
     client = bigquery.Client()
 
     # save to table bigquery: note- delete tables if exist before saving?    
-    prepareBigQueryData(client, queryVal1, "noaa_gsod_extract")
+    prepareBigQueryData(client, queryVal1a, "noaa_gsod_extract")
+    prepareBigQueryData(client, queryVal1b, "noaa_metadata_extract")
     prepareBigQueryData(client, queryVal2a, "citibike_trips_extract")
     prepareBigQueryData(client, queryVal2b, "citibike_path_extract")
     prepareBigQueryData(client, queryVal3, "citibike_statmeta_extract")
@@ -257,6 +267,7 @@ if __name__ == '__main__':
 
     # save to GCS
     saveBigQueryDataToGCP(client, "weatherdata", "noaa_gsod_extract")
+    saveBigQueryDataToGCP(client, "weathermeta", "noaa_metadata_extract")
     saveBigQueryDataToGCP(client, "bikedata", "citibike_trips_extract")
     saveBigQueryDataToGCP(client, "bikepathdata", "citibike_path_extract")
     saveBigQueryDataToGCP(client, "statmetadata", "citibike_statmeta_extract")
