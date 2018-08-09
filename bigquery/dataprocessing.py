@@ -129,9 +129,9 @@ queryVal1a = """
     """
 
 queryVal1b = """
-    SELECT UNIQUE stn, lat, lon
+    SELECT DISTINCT wban, lat, lon
     FROM `bigquery-public-data.noaa_gsod.stations`
-    WHERE stn = '725060'
+    WHERE wban = '14756'
     """
 
 # 2. bike data: no. of rentals per day, by station
