@@ -1,4 +1,5 @@
 bigquery/testdata/
 bigquery/weatherdata/
+bigquery/weathermeta/
 bigquery/statmetadata/
 bigquery/bikedata/

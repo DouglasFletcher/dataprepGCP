@@ -63,7 +63,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS weathermeta (
    station INT
    ,lon DOUBLE
    ,lat DOUBLE
-   ,GEOID STRING
+   ,postcode STRING
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
@@ -104,7 +104,7 @@ CREATE EXTERNAL TABLE IF NOT EXISTS statmetadata (
    ,last_reported STRING
    ,eightd_has_available_keys BOOLEAN
    ,eightd_has_key_dispenser BOOLEAN
-   ,GEOID STRING
+   ,postcode STRING
 )
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
