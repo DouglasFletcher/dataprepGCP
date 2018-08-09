@@ -36,7 +36,7 @@ def geocodeOhneSpark(fileDir, fileName, colX, colY):
 if __name__ == '__main__':
 	t = time.clock()
 	cwd = os.getcwd()
-	geocodeOhneSpark(cwd + "/weatherdata/","output","lon","lat")
+	geocodeOhneSpark(cwd + "/weathermeta/","output","lon","lat")
 	geocodeOhneSpark(cwd + "/statmetadata/","output","longitude","latitude")
 
 	print(format(time.clock()-t, ".2f"))
