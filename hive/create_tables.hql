@@ -1,5 +1,5 @@
 CREATE EXTERNAL TABLE IF NOT EXISTS bikedata (
-	start_station_id INT
+    start_station_id INT
    ,date STRING
    ,day INT
    ,month INT
@@ -18,7 +18,7 @@ LOCATION 'gs://denolte-showcase-qlikbigdata/tables/bikedata'
 tblproperties ("skip.header.line.count"="1");
 
 CREATE EXTERNAL TABLE IF NOT EXISTS bikepathdata (
-	tripduration INT
+    tripduration INT
    ,starttime STRING
    ,stoptime STRING
    ,start_station_id INT
@@ -42,7 +42,7 @@ LOCATION 'gs://denolte-showcase-qlikbigdata/tables/bikepathdata'
 tblproperties ("skip.header.line.count"="1");
 
 CREATE EXTERNAL TABLE IF NOT EXISTS weatherdata (
-	station INT
+    station INT
    ,year INT
    ,month INT
    ,day INT
@@ -56,11 +56,11 @@ CREATE EXTERNAL TABLE IF NOT EXISTS weatherdata (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 'gs://denolte-showcase-qlikbigdata/tables/weatherdata/output.csv'
+LOCATION 'gs://denolte-showcase-qlikbigdata/tables/weatherdata'
 tblproperties ("skip.header.line.count"="1");
 
 CREATE EXTERNAL TABLE IF NOT EXISTS weathermeta (
-   station INT
+    station INT
    ,lon DOUBLE
    ,lat DOUBLE
    ,postcode STRING
@@ -68,11 +68,11 @@ CREATE EXTERNAL TABLE IF NOT EXISTS weathermeta (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 'gs://denolte-showcase-qlikbigdata/tables/weathermeta/output_geocoded.csv'
+LOCATION 'gs://denolte-showcase-qlikbigdata/tables/weathermeta'
 tblproperties ("skip.header.line.count"="1");
 
 CREATE EXTERNAL TABLE IF NOT EXISTS censusdata (
-	zipcode STRING
+    zipcode STRING
    ,geo_id STRING
    ,minimum_age INT
    ,maximum_age INT
@@ -86,7 +86,7 @@ LOCATION 'gs://denolte-showcase-qlikbigdata/tables/censusdata'
 tblproperties ("skip.header.line.count"="1");
 
 CREATE EXTERNAL TABLE IF NOT EXISTS statmetadata (
-	station_id INT
+    station_id INT
    ,name STRING
    ,short_name STRING
    ,latitude DOUBLE
@@ -109,8 +109,5 @@ CREATE EXTERNAL TABLE IF NOT EXISTS statmetadata (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION 'gs://denolte-showcase-qlikbigdata/tables/statmetadata/output_geocoded.csv'
+LOCATION 'gs://denolte-showcase-qlikbigdata/tables/statmetadata'
 tblproperties ("skip.header.line.count"="1");
-
-
-
