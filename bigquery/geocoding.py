@@ -50,8 +50,8 @@ if __name__ == '__main__':
 	t = time.clock()
 	cwd = os.getcwd()
 
-	geocodeOhneSpark(cwd + "/weathermeta/","output","lat","lon")
+	geocodeOhneSpark(cwd + "/noaa_gsod_stations/","output","lat","lon")
 	print(format(time.clock()-t, ".2f"))
 
-	geocodeOhneSpark(cwd + "/statmetadata/","output","latitude","longitude")
+	geocodeOhneSpark(cwd + "/citybike_stations/","output","latitude","longitude")
 	print(format(time.clock()-t, ".2f"))

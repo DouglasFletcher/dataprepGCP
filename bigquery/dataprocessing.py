@@ -46,76 +46,162 @@ LOCATION = os.environ.get('LOCATION')
 # queries
 # 1. weather data: precipitation by day in new-york
 queryVal1a = """
-    SELECT d1.*, d2.lat, d2.lon FROM ( 
-        SELECT stn, wban, year, mo, da
-        , IF( sndp = 999.9, null, sndp) sndp 
-        , IF( prcp = 99.99, null, prcp) prcp
+    SELECT * FROM ( 
+        SELECT
+          stn
+        , wban
+        , year
+        , mo
+        , da
         , IF( temp = 9999.9, null, temp) temp
+        , count_temp
+        , dewp
+        , count_dewp
+        , slp
+        , count_slp
+        , stp
+        , count_stp
+        , visib
+        , count_visib
         , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
+        , count_wdsp
+        , mxpsd
+        , gust
+        , max
+        , flag_max
+        , min
+        , flag_min
+        , IF( prcp = 99.99, null, prcp) prcp
+        , flag_prcp
+        , IF( sndp = 999.9, null, sndp) sndp
+        , fog
+        , rain_drizzle
+        , snow_ice_pellets
+        , hail
+        , thunder
+        , tornado_funnel_cloud
         FROM `bigquery-public-data.noaa_gsod.gsod2018`
-        WHERE stn = '725060' 
         UNION ALL
-        SELECT stn, wban, year, mo, da
-        , IF( sndp = 999.9, null, sndp) sndp 
-        , IF( prcp = 99.99, null, prcp) prcp
+        SELECT 
+          stn
+        , wban
+        , year
+        , mo
+        , da
         , IF( temp = 9999.9, null, temp) temp
+        , count_temp
+        , dewp
+        , count_dewp
+        , slp
+        , count_slp
+        , stp
+        , count_stp
+        , visib
+        , count_visib
         , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
-        FROM `bigquery-public-data.noaa_gsod.gsod2017`
-        WHERE stn = '725060' 
+        , count_wdsp
+        , mxpsd
+        , gust
+        , max
+        , flag_max
+        , min
+        , flag_min
+        , IF( prcp = 99.99, null, prcp) prcp
+        , flag_prcp
+        , IF( sndp = 999.9, null, sndp) sndp
+        , fog
+        , rain_drizzle
+        , snow_ice_pellets
+        , hail
+        , thunder
+        , tornado_funnel_cloud
+     FROM `bigquery-public-data.noaa_gsod.gsod2017`
         UNION ALL
-        SELECT stn, wban, year, mo, da
-        , IF( sndp = 999.9, null, sndp) sndp 
-        , IF( prcp = 99.99, null, prcp) prcp
+        SELECT
+          stn
+        , wban
+        , year
+        , mo
+        , da
         , IF( temp = 9999.9, null, temp) temp
+        , count_temp
+        , dewp
+        , count_dewp
+        , slp
+        , count_slp
+        , stp
+        , count_stp
+        , visib
+        , count_visib
         , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
+        , count_wdsp
+        , mxpsd
+        , gust
+        , max
+        , flag_max
+        , min
+        , flag_min
+        , IF( prcp = 99.99, null, prcp) prcp
+        , flag_prcp
+        , IF( sndp = 999.9, null, sndp) sndp
+        , fog
+        , rain_drizzle
+        , snow_ice_pellets
+        , hail
+        , thunder
+        , tornado_funnel_cloud
         FROM `bigquery-public-data.noaa_gsod.gsod2016`
-        WHERE stn = '725060' 
         UNION ALL
-        SELECT stn, wban, year, mo, da
-        , IF( sndp = 999.9, null, sndp) sndp 
-        , IF( prcp = 99.99, null, prcp) prcp
+        SELECT
+          stn
+        , wban
+        , year
+        , mo
+        , da
         , IF( temp = 9999.9, null, temp) temp
+        , count_temp
+        , dewp
+        , count_dewp
+        , slp
+        , count_slp
+        , stp
+        , count_stp
+        , visib
+        , count_visib
         , IF( CAST(wdsp as FLOAT64) = 999.9, null, wdsp) wdsp
+        , count_wdsp
+        , mxpsd
+        , gust
+        , max
+        , flag_max
+        , min
+        , flag_min
+        , IF( prcp = 99.99, null, prcp) prcp
+        , flag_prcp
+        , IF( sndp = 999.9, null, sndp) sndp
+        , fog
+        , rain_drizzle
+        , snow_ice_pellets
+        , hail
+        , thunder
+        , tornado_funnel_cloud
         FROM `bigquery-public-data.noaa_gsod.gsod2015`
-        WHERE stn = '725060'
-    ) AS d1 
-    LEFT JOIN `bigquery-public-data.noaa_gsod.stations` d2 
-    ON d1.wban = d2.wban  
+    )
     """
 
 queryVal1b = """
-    SELECT DISTINCT wban, lat, lon
+    SELECT *
     FROM `bigquery-public-data.noaa_gsod.stations`
     WHERE wban = '14756'
     """
 
 # 2. bike data: no. of rentals per day, by station
 queryVal2a = """
-    SELECT start_station_id 
-        , DATE(starttime) as date
-        , EXTRACT(DAY FROM DATE(starttime)) as da
-        , EXTRACT(MONTH FROM DATE(starttime)) as mo
-        , EXTRACT(YEAR FROM DATE(starttime)) as year
-        , usertype
-        , start_station_name 
-        , start_station_latitude
-        , start_station_longitude
-        , sum(tripduration) as totalSecondsRented
-        , sum(1) as rentCounter
+    SELECT * 
     FROM `bigquery-public-data.new_york_citibike.citibike_trips` 
-    WHERE start_station_id IS NOT NULL
-    GROUP BY start_station_id
-        , date
-        , da
-        , mo
-        , year
-        , usertype
-        , start_station_name
-        , start_station_latitude
-        , start_station_longitude  
-    ORDER BY start_station_id, date
     """
 
+# Not used at the moment
 queryVal2b = """
     SELECT
         tripduration
@@ -140,35 +226,13 @@ queryVal2b = """
 
 # 3. bike station metadata (e.g. possible rentals)
 queryVal2c = """
-    SELECT station_id 
-        , name
-        , short_name 
-        , latitude 
-        , longitude 
-        , region_id 
-        , rental_methods
-        , capacity
-        , num_bikes_available 
-        , num_bikes_disabled
-        , num_docks_available
-        , num_docks_disabled
-        , is_installed
-        , is_renting
-        , is_returning
-        , last_reported
-        , eightd_has_available_keys
-        , eightd_has_key_dispenser
+    SELECT * 
     FROM `bigquery-public-data.new_york_citibike.citibike_stations`
     """
 
 # 4. population data: geoid, with population, age range
 queryVal3 = """
-	SELECT zipcode
-  		, geo_id
-  		, minimum_age
-  		, maximum_age
-  		, gender
-  		, population 
+	SELECT *
 	FROM `bigquery-public-data.census_bureau_usa.population_by_zip_2010`
 	"""
 
@@ -193,7 +257,7 @@ def saveBigQueryDataToGCP(client, outdir, tableId):
     e.g. gs:/denolte-showcase-qlikbigdata/tables/bikedata/output.csv
     """
     # def save locations
-    destinationUri = 'gs://{}/tables/{}/{}'.format(BUCKET_NAME, outdir, 'output.csv')
+    destinationUri = 'gs://{}/tables/{}'.format(BUCKET_NAME, outdir)
     datasetRef = client.dataset(DATASET_ID, project=PROJECT_ID)
     tableRef = datasetRef.table(tableId)
     # extract to GCS
@@ -213,17 +277,17 @@ if __name__ == '__main__':
     client = bigquery.Client()
 
     # save to table bigquery: note- delete tables if exist before saving?    
-    prepareBigQueryData(client, queryVal1a, "noaa_gsod_extract")
-    prepareBigQueryData(client, queryVal1b, "noaa_metadata_extract")
-    prepareBigQueryData(client, queryVal2a, "citibike_trips_extract")
-    prepareBigQueryData(client, queryVal2b, "citibike_path_extract")
-    prepareBigQueryData(client, queryVal2c, "citibike_statmeta_extract")
-    prepareBigQueryData(client, queryVal3, "census_pop_extract")
+    prepareBigQueryData(client, queryVal1a, "noaa_gsod")
+    prepareBigQueryData(client, queryVal1b, "noaa_gsod_stations")
+    prepareBigQueryData(client, queryVal2a, "citybike_trips")
+    # prepareBigQueryData(client, queryVal2b, "citibike_path_extract")
+    prepareBigQueryData(client, queryVal2c, "citybike_stations")
+    prepareBigQueryData(client, queryVal3, "population_by_zip_2010")
 
     # save to GCS
-    saveBigQueryDataToGCP(client, "weatherdata", "noaa_gsod_extract")
-    saveBigQueryDataToGCP(client, "weathermeta", "noaa_metadata_extract")
-    saveBigQueryDataToGCP(client, "bikedata", "citibike_trips_extract")
-    saveBigQueryDataToGCP(client, "bikepathdata", "citibike_path_extract")
-    saveBigQueryDataToGCP(client, "statmetadata", "citibike_statmeta_extract")
-    saveBigQueryDataToGCP(client, "censusdata", "census_pop_extract")
+    saveBigQueryDataToGCP(client, "noaa_gsod/output-*.csv", "noaa_gsod")
+    saveBigQueryDataToGCP(client, "noaa_gsod_stations/output.csv", "noaa_gsod_stations")
+    saveBigQueryDataToGCP(client, "citybike_trips/output-*.csv", "citybike_trips")
+    # saveBigQueryDataToGCP(client, "bikepathdata", "citibike_path_extract")
+    saveBigQueryDataToGCP(client, "citybike_stations/output.csv", "citybike_stations")
+    saveBigQueryDataToGCP(client, "population_by_zip_2010/output.csv", "population_by_zip_2010")
